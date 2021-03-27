@@ -16,14 +16,14 @@ public class TestInput : MonoBehaviour
 
     private void OnEnable()
     {
-        inputManager.OnStartTouchEvent += Jump;
-        inputManager.OnEndTouchEvent += FinishTouch;
+        //inputManager.OnStartTouchEvent += Jump;
+        //inputManager.OnEndTouchEvent += FinishTouch;
     }
 
     private void OnDisable()
     {
-        inputManager.OnStartTouchEvent -= Jump;
-        inputManager.OnEndTouchEvent -= FinishTouch;
+        //inputManager.OnStartTouchEvent -= Jump;
+        //inputManager.OnEndTouchEvent -= FinishTouch;
     }
     private void Awake()
     {
@@ -67,16 +67,30 @@ public class TestInput : MonoBehaviour
         Vector3 screenCoordinates = new Vector3(screenPos.x, screenPos.y, main.nearClipPlane);
         Vector3 worldCoordinates = main.ScreenToWorldPoint(screenCoordinates);
         worldCoordinates.z = 0;
+        Debug.Log(inputManager.PrimaryPosition().x);
         if(screenPos.x <= Screen.width / 2)
         {
-            Debug.Log("Touch on Left: " + screenPos.x);
-            goingUp = true;
+            //Debug.Log("Touch on Left: " + screenPos.x);
+            if (inputManager.PrimaryPosition().x <= 0)
+            {
+                goingUp = true;
+            }
+            else
+            {
+                goingUp = false;
+            }
+           
             //rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
         }
         else if(screenPos.x > Screen.width / 2)
         {
 
             Debug.Log("Touch on Right: " + screenPos.x);
+        }
+        
+        if(inputManager.PrimaryPosition().x > 0)
+        {
+            goingUp = false;
         }
         
     }
