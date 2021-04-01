@@ -4,32 +4,41 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField]
+    private float countdown;
     private void OnEnable()
     {
-        Debug.Log("bullet script enabled");
+        //Debug.Log("bullet script enabled");
+        countdown = 2;
     }
     private void OnDisable()
     {
-        Debug.Log("bullet script disabled");
-        BulletActions.OnBulletHit(this);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        //Debug.Log("bullet script disabled");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        countdown -= Time.deltaTime;
+        if(countdown <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
-
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "wall")
         {
             BulletActions.OnBulletHit(this);
+            gameObject.SetActive(false);
+        }
+    }
+    */
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "Tilemap")
+        {
+            //BulletActions.OnBulletHit(this);
             gameObject.SetActive(false);
         }
     }

@@ -18,6 +18,8 @@ public class InputManager : MonoBehaviour
     public event EndTouchPrimaryEvent OnEndTouchPrimaryEvent;
     #endregion
 
+    
+
     private Camera mainCam;
     private Player playerControls;
 
@@ -43,6 +45,7 @@ public class InputManager : MonoBehaviour
         //playerControls.Touch.TouchPress.canceled += ctx => EndTouch(ctx);
         playerControls.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx);
         playerControls.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
+        
     }
 
     // Update is called once per frame

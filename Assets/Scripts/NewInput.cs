@@ -2,34 +2,90 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 
 public class NewInput : MonoBehaviour
 {
-    private Player playerControls;
+    private PlayerInput playerInput;
     private void Awake()
     {
-        playerControls = new Player();
+        playerInput = new PlayerInput();
     }
     private void OnEnable()
     {
-        playerControls.Enable();
-        TouchSimulation.Enable();
-        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown += FingerDown;
+        playerInput.Enable();
+        
     }
     private void OnDisable()
     {
-        playerControls.Disable();
-        TouchSimulation.Disable();
-        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown -= FingerDown;
-    }
-
-    private void Start()
-    {
-    }
-
-    private void FingerDown(Finger finger)
-    {
+        playerInput.Disable();
         
     }
+
+    [SerializeField]
+    private float upForce;
+    private bool goup;
+    [SerializeField]
+    private float atkRate;
+    private float atkTimer;
+    private Transform atkPos;
+    [SerializeField]
+    private float shootSpeed;
+    private BulletPool bulletPool;
+    private Rigidbody2D rb2d;
+    private void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+        bulletPool = FindObjectOfType<BulletPool>();
+        atkPos = transform.GetChild(0).transform;
+        
+    }
+
+    private void Update()
+    {
+        if(transform.position.x < -6)
+        {
+            rb2d.velocity = new Vector2(1, rb2d.velocity.y);
+        }
+        else if(transform.position.x > -5.5)
+        {
+            rb2d.velocity = new Vector2(-1, rb2d.velocity.y);
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        }
+
+
+        atkTimer -= Time.deltaTime;
+        if (goup)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, upForce);
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
+        }
+    }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            goup = true;
+        }
+        else if (context.canceled)
+        {
+            goup = false;
+        }
+    }
+
+    public void Fire(InputAction.CallbackContext context)
+    {
+        if(atkTimer <= 0)
+        {
+            atkTimer = atkRate;
+            bulletPool.SpawnBullet(atkPos, shootSpeed);
+        }
+    }
+   
 }

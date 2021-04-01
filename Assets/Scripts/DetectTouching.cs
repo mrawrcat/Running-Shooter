@@ -18,11 +18,16 @@ public class DetectTouching : MonoBehaviour
             tilename = hit.collider.name;
             if(hit.collider.tag == "Tilemap")
             {
-                if(transform.position.x > 0)
+                if(transform.position.x > -23)
                 {
                     if (transform.position.x != hit.collider.gameObject.transform.position.x + tilemap_length)
                     {
+                        Debug.Log("not touching tilemap in front");
                         transform.position = new Vector2(hit.collider.gameObject.transform.position.x + tilemap_length, transform.position.y);
+                    }
+                    else
+                    {
+                        Debug.Log("touching tilemap in front");
                     }
                 }
             }

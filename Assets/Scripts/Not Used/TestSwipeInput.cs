@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TestSwipeInput : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class TestSwipeInput : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private bool touching;
+    [SerializeField]
     private bool goup;
 
     [SerializeField]
@@ -42,7 +44,7 @@ public class TestSwipeInput : MonoBehaviour
 
     private void Update()
     {
-        GetPrimaryPos();
+        //GetPrimaryPos();
 
         if (goup)
         {
@@ -84,4 +86,34 @@ public class TestSwipeInput : MonoBehaviour
             goup = false;
         }
     }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            goup = true;
+        }
+        else if (context.canceled)
+        {
+            goup = false;
+        }
+    }
+
+    
+
+    public void GoUp()
+    {
+        goup = true;
+    }
+
+    public void GoDown()
+    {
+        goup = false;
+    }
+
+    public void buttonPress()
+    {
+        Debug.Log("pressed jump button");
+    }
+
 }

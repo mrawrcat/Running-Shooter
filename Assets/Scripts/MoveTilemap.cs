@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoveTilemap : MonoBehaviour
 {
-    
-    
+
+    private TilemapPool tilemapPool;
     private Rigidbody2D rb2d;
     
     // Start is called before the first frame update
@@ -14,6 +14,7 @@ public class MoveTilemap : MonoBehaviour
         //spawner = FindObjectOfType<Spawner>();
         //transform.Translate(Vector2.left * Time.deltaTime * GameManager.manager.speed);
         rb2d = GetComponent<Rigidbody2D>();
+        tilemapPool = FindObjectOfType<TilemapPool>();
         //rb2d.velocity = Vector2.left * GameManager.manager.finalSpeed;
     }
 
@@ -21,7 +22,13 @@ public class MoveTilemap : MonoBehaviour
     void Update()
     {
         //transform.Translate(Vector2.left * Time.deltaTime * GameManager.manager.speed);
-        //rb2d.velocity = Vector2.left * GameManager.manager.finalSpeed;
+        rb2d.velocity = Vector2.left * GameManager.manager.tileSpeed;
+
+        if(transform.position.x <= -23)
+        {
+            tilemapPool.SpawnTilemap(tilemapPool.gameObject.transform);
+            gameObject.SetActive(false);
+        }
     }
 
     //private void OnTriggerEnter2D(Collider2D collision)

@@ -10,14 +10,17 @@ public class BulletManager : MonoBehaviour
 
     [SerializeField]
     private Text bulletTxt;
+    private float countdown;
     private void OnEnable()
     {
         BulletActions.OnBulletHit += BulletHit;
+        BulletActions.BulletTimer += BulletCountdown;
     }
 
     private void OnDisable()
     {
         BulletActions.OnBulletHit -= BulletHit;
+        BulletActions.BulletTimer -= BulletCountdown;
     }
     // Start is called before the first frame update
     void Start()
@@ -29,10 +32,17 @@ public class BulletManager : MonoBehaviour
     void Update()
     {
         bulletTxt.text = bulletCount.ToString();
+
+
     }
 
     public void BulletHit(Bullet bullet)
     {
         bulletCount++;
+    }
+
+    public void BulletCountdown(Bullet bullet)
+    {
+
     }
 }
