@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public bool dead;
     public float tileSpeed;
+    public bool tutorialOn;
     private void Awake()
     {
         if (manager == null)

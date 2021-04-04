@@ -50,13 +50,8 @@ public class TilemapPool : MonoBehaviour
         }
 
         GameObject objToSpawn = poolDictionary[tag].Dequeue();
-        objToSpawn.SetActive(true);
         objToSpawn.transform.position = pos.position;
-
-        //Rigidbody2D proj_rb = objToSpawn.GetComponent<Rigidbody2D>();
-        //proj_rb.velocity = Vector2.zero;
-        //proj_rb.AddForce(new Vector2(Random.Range(direction.x ,direction.y), force), ForceMode2D.Impulse);
-        //objToSpawn.GetComponent<Rigidbody2D>().AddForce(pos.right * speed, ForceMode2D.Impulse);
+        objToSpawn.SetActive(true);
         poolDictionary[tag].Enqueue(objToSpawn);
 
         return objToSpawn;
@@ -64,6 +59,6 @@ public class TilemapPool : MonoBehaviour
 
     public void SpawnTilemap(Transform pos)
     {
-        SpawnTilemap(tags[Random.Range(0, tags.Length)], pos);
+        SpawnTilemap(tags[0], pos);
     }
 }

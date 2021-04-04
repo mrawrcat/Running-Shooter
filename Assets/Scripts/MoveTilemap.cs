@@ -26,7 +26,7 @@ public class MoveTilemap : MonoBehaviour
 
         if(transform.position.x <= -23)
         {
-            tilemapPool.SpawnTilemap(tilemapPool.gameObject.transform);
+            //tilemapPool.SpawnTilemap(tilemapPool.gameObject.transform);
             gameObject.SetActive(false);
         }
     }

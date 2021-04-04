@@ -30,6 +30,8 @@ public class NewInput : MonoBehaviour
     private Transform atkPos;
     [SerializeField]
     private float shootSpeed;
+    [SerializeField]
+    private float forwardSpeed;
     private BulletPool bulletPool;
     private Rigidbody2D rb2d;
     private void Start()
@@ -44,11 +46,11 @@ public class NewInput : MonoBehaviour
     {
         if(transform.position.x < -6)
         {
-            rb2d.velocity = new Vector2(1, rb2d.velocity.y);
+            rb2d.velocity = new Vector2(forwardSpeed, rb2d.velocity.y);
         }
         else if(transform.position.x > -5.5)
         {
-            rb2d.velocity = new Vector2(-1, rb2d.velocity.y);
+            rb2d.velocity = new Vector2(-forwardSpeed, rb2d.velocity.y);
         }
         else
         {
