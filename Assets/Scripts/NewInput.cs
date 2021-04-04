@@ -24,6 +24,7 @@ public class NewInput : MonoBehaviour
     [SerializeField]
     private float upForce;
     private bool goup;
+    private bool pressFire;
     [SerializeField]
     private float atkRate;
     private float atkTimer;
@@ -67,6 +68,15 @@ public class NewInput : MonoBehaviour
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
         }
+
+        if (pressFire)
+        {
+            if (atkTimer <= 0)
+            {
+                atkTimer = atkRate;
+                bulletPool.SpawnBullet(atkPos, shootSpeed);
+            }
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -83,11 +93,15 @@ public class NewInput : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if(atkTimer <= 0)
+        if (context.performed)
         {
-            atkTimer = atkRate;
-            bulletPool.SpawnBullet(atkPos, shootSpeed);
+            pressFire = true;
         }
+        else if (context.canceled)
+        {
+            pressFire = false;
+        }
+            
     }
    
 }

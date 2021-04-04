@@ -43,7 +43,6 @@ public class DetectTouching : MonoBehaviour
         }
         else
         {
-            //transform.Translate(Vector2.left * Time.deltaTime * GameManager.manager.tileSpeed);
             rb2d.velocity = Vector2.left * GameManager.manager.tileSpeed;
         }
 

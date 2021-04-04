@@ -5,11 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
+    private float countToDestroy;
     private float countdown;
     private void OnEnable()
     {
         //Debug.Log("bullet script enabled");
-        countdown = 2;
+        countdown = countToDestroy;
     }
     private void OnDisable()
     {
