@@ -39,6 +39,7 @@ public class BulletManager : MonoBehaviour
     public void BulletHit(Bullet bullet)
     {
         bulletCount++;
+        CamShake.camInstance.Shake(3, .1f);
     }
 
     public void BulletCountdown(Bullet bullet)

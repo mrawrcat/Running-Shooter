@@ -62,7 +62,15 @@ public class NewInput : MonoBehaviour
         atkTimer -= Time.deltaTime;
         if (goup)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, upForce);
+            //rb2d.velocity = new Vector2(rb2d.velocity.x, upForce);
+            if(rb2d.velocity.y < 0)
+            {
+                rb2d.velocity = Vector2.zero;
+            }
+            else
+            {
+                rb2d.AddForce(transform.up * upForce, ForceMode2D.Force);
+            }
         }
         else
         {

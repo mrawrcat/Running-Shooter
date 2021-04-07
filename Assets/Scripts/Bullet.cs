@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
     {
         if(collision.collider.tag == "Tilemap")
         {
-            //BulletActions.OnBulletHit(this);
+            BulletActions.OnBulletHit(this);
             gameObject.SetActive(false);
         }
     }
