@@ -40,6 +40,7 @@ public class BulletManager : MonoBehaviour
     {
         bulletCount++;
         CamShake.camInstance.Shake(3, .1f);
+        AudioManager.audioManager.Play("Hit");
     }
 
     public void BulletCountdown(Bullet bullet)

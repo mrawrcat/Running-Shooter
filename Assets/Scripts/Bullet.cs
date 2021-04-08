@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float countToDestroy;
     private float countdown;
+
     private void OnEnable()
     {
         //Debug.Log("bullet script enabled");
@@ -40,6 +41,7 @@ public class Bullet : MonoBehaviour
         if(collision.collider.tag == "Tilemap")
         {
             BulletActions.OnBulletHit(this);
+            //AudioManager.audioManager.Play("Hit");
             gameObject.SetActive(false);
         }
     }

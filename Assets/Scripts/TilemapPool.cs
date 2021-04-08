@@ -59,6 +59,6 @@ public class TilemapPool : MonoBehaviour
 
     public void SpawnTilemap(Transform pos)
     {
-        SpawnTilemap(tags[0], pos);
+        SpawnTilemap(tags[Random.Range(0, tags.Length)], pos);
     }
 }

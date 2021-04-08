@@ -87,6 +87,11 @@ public class NewInput : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed)

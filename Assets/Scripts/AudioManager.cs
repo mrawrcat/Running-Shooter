@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("BG");
+        Play("Theme");
     }
 
     public void Play(string name)
@@ -43,5 +43,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+        Debug.Log("sound played");
     }
 }
